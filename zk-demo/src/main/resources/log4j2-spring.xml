@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="LOG_HOME">${sys:user.home}/logs/zk-demo</Property>
+        <Property name="ENCODING">utf-8</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="CONSOLE-LOG" target="SYSTEM_OUT" follow="true">
+            <StandardLayout/>
+        </Console>
+
+        <RollingRandomAccessFile name="BUSINESS-LOG" fileName="${LOG_HOME}/business.log"
+                                 filePattern="${LOG_HOME}/business.log.%d{yyyyMMddHH}">
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <StandardLayout/>
+        </RollingRandomAccessFile>
+
+    </Appenders>
+
+
+    <Loggers>
+        <Root level="debug" includeLocation="true">
+            <AppenderRef ref="CONSOLE-LOG"/>
+            <AppenderRef ref="BUSINESS-LOG"/>
+        </Root>
+    </Loggers>
+</Configuration>

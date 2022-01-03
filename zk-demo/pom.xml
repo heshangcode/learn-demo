@@ -11,11 +11,23 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>zk-demo</name>
     <description>zk-demo</description>
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
-    <dependencies>
 
+<!--  引用 zk 不排除 log4j2，项目起不来会报错
+  Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+  [(31条消息) SLF4J: Class path contains multiple SLF4J bindings. 问题原因及解决方法。_SilenceCarrot的专栏-CSDN博客](https://blog.csdn.net/SilenceCarrot/article/details/80609401)
+  -->
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+            <artifactId>zookeeper</artifactId>
+            <version>3.7.0</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -22,6 +22,7 @@
         <module>zk-demo</module>
         <module>spi-demo</module>
         <module>thread-demo</module>
+        <module>base-demo</module>
     </modules>
 
     <properties>

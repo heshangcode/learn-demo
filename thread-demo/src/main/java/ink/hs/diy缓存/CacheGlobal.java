@@ -3,6 +3,7 @@ package ink.hs.diy缓存;
 import ink.hs.diy缓存.listener.AddListener;
 import ink.hs.diy缓存.listener.ReadListener;
 import ink.hs.diy缓存.listener.RemovalListener;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date 2022/11/3 08:47
  * version: 1.0
  */
+@Data
 public class CacheGlobal {
     public ConcurrentHashMap<String, MyCache> cacheConcurrentHashMap = new ConcurrentHashMap<>();
 
@@ -38,6 +40,9 @@ public class CacheGlobal {
         this.maxmumSize = maxmumSize;
         return this;
     }
+    public static CacheGlobal DEFAULT_CACHE() {
+        return new CacheGlobal(5, true);
+    }
 
     public CacheGlobal addAddListener(AddListener addListener) {
         this.addListeners.add(addListener);
@@ -53,5 +58,7 @@ public class CacheGlobal {
         this.removalListeners.add(removalListener);
         return this;
     }
+
+
 
 }

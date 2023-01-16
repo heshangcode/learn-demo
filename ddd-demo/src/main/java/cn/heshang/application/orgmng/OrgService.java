@@ -18,12 +18,12 @@ public class OrgService {
     @Autowired
     private final OrgRepository orgRepository;
     @Autowired
-    private final OrgValidator orgValidator;
+    private final OrgFactory orgFactory;
 
     // "添加组织"功能的入口
     public OrgDto addOrg(OrgDto request, Long userId) {
-        validate(request);
-        Org org = buildOrg(request, userId);
+        //包含校验逻辑在内的创建逻辑都委托给了工厂
+        Org org = orgFactory.build(request, userId);
         org = orgRepository.save(org);
         return buildOrgDto(org);
     }
@@ -31,14 +31,6 @@ public class OrgService {
     private OrgDto buildOrgDto(Org org) {
         //将领域对象转成DTO...
     }
-
-    private Org buildOrg(OrgDto request, Long userId) {
-        //将DTO转成领域对象...
-    }
-
-    //把各业务规则抽成了方法
-    private void validate(OrgDto request) {
-        orgValidator.validate(request);
-    }
+    //原来DTO转领域对象的逻辑也移到了工厂
 
 }

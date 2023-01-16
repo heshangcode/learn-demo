@@ -20,10 +20,19 @@ public class OrgService {
     @Autowired
     private final OrgFactory orgFactory;
 
+    @Autowired
+    private final OrgBuilderFactory orgBuilderFactory;
+
     // "添加组织"功能的入口
     public OrgDto addOrg(OrgDto request, Long userId) {
+        OrgBuilder orgBuilder = orgBuilderFactory.create();
+        //修改的部分在这里
+        //Org org = orgBuilder.tenantId(request.getTenantId()).orgTypeCode(request.getOrgTypeCode()).leaderId(request.getLeaderId()).superiorId(request.getSuperiorId()).name(request.getName()).createdBy(userid).build();
+        Org org = orgBuilder.tenantId(request.getTenantId()).build();
+
         //包含校验逻辑在内的创建逻辑都委托给了工厂
-        Org org = orgFactory.build(request, userId);
+        //Org org = orgFactory.build(request, userId);
+
         org = orgRepository.save(org);
         return buildOrgDto(org);
     }

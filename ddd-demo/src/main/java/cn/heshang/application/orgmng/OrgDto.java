@@ -1,4 +1,4 @@
-package cn.heshang.adapter.driven.resetful.orgmng;
+package cn.heshang.application.orgmng;
 
 /**
  * TODO

@@ -1,6 +1,5 @@
 package cn.heshang.application.orgmng;
 
-import cn.heshang.adapter.driven.resetful.orgmng.OrgDto;
 import cn.heshang.adapter.driving.persistence.orgmng.EmpRepository;
 import cn.heshang.adapter.driving.persistence.orgmng.OrgRepository;
 import cn.heshang.adapter.driving.persistence.orgmng.OrgTypeRepository;

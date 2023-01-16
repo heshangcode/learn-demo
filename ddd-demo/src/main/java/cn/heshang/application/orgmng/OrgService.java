@@ -47,82 +47,96 @@ public class OrgService {
         //将DTO转成领域对象...
     }
 
-    //主要的领域逻辑在这个方法
+    //把各业务规则抽成了方法
     private void validate(OrgDto request) {
-        final var tenant = request.getTenant();
 
-        // 租户必须有效
-        if (!tenantRepository.existsByIdAndStatus(tenant, TenantStatus.EFFECTIVE)) {
-            throw new BusinessException("id为'" + tenant
-                    + "'的租户不是有效租户！");
-        }
+        final Long tenant = request.getTenant();
 
-        // 组织类别不能为空
-        if (isBlank(request.getOrgType())) {
-            throw new BusinessException("组织类别不能为空！");
-        }
+        tenantShouldValid(tenant);
 
-        // 企业是在创建租户的时候创建好的，因此不能单独创建企业
-        if ("ENTP".equals(request.getOrgType())) {
-            throw new BusinessException("企业是在创建租户的时候创建好的，因此不能单独创建企业!");
-        }
+        leaderShouldBeEffective(tenant, request.getLeader());
 
-        // 组织类别必须有效
-        if (!orgTypeRepository.existsByCodeAndStatus(tenant, request.getOrgType(), OrgTypeStatus.EFFECTIVE)) {
-            throw new BusinessException("'" + request.getOrgType()
-                    + "'不是有效的组织类别代码！");
-        }
+        //为了避免这个方法太长，把一些规则进一步分了组
+        verifyOrgType(tenant, request.getOrgType());
+        validateSuperior(tenant, request.getSuperior(), request.getOrgType());
+        verifyOrgName(tenant, request.getName(), request.getSuperior());
+    }
 
+    // 租户必须有效
+    private void tenantShouldValid(Long tenant) {
+        //...
+    }
 
-        // 上级组织应该是有效组织
-        Org superior = orgRepository.findByIdAndStatus(tenant
-                        , request.getSuperior(), OrgStatus.EFFECTIVE)
-                .orElseThrow(() ->
-                        new BusinessException("'" + request.getSuperior()
-                                + "' 不是有效的组织 id !"));
+    // 组织负责人可以空缺，如果有的话，的必须是一个在职员工（含试用期）
+    private void leaderShouldBeEffective(Long tenant, Long leader) {
+        //...
+    }
 
+    //校验组织类别的规则分组
+    private void verifyOrgType(Long tenant, String orgType) {
+        orgTypeShouldNotEmpty(orgType);
+        orgTypeShouldBeValid(tenant, orgType);
+        shouldNotCreateEntpAlone(orgType);
+    }
 
-        // 取上级组织的组织类别
-        OrgType superiorOrgType = orgTypeRepository.findByCodeAndStatus(tenant
-                        , superior.getOrgType()
-                        , OrgTypeStatus.EFFECTIVE)
-                .orElseThrow(() ->
-                        new DirtyDataException("id 为 '"
-                                + request.getSuperior()
-                                + "' 的组织的组织类型代码 '"
-                                + superior.getOrgType() + "' 无效!"));
+    // 组织类别不能为空
+    private void orgTypeShouldNotEmpty(String orgType) {
+        //...
+    }
 
-        // 开发组的上级只能是开发中心
-        if ("DEVGRP".equals(request.getOrgType()) && !"DEVCENT".equals(superiorOrgType.getCode())) {
-            throw new BusinessException("开发组的上级(id = '"
-                    + request.getSuperior() + "')不是开发中心！");
-        }
+    // 组织类别必须有效
+    private void orgTypeShouldBeValid(Long tenant, String orgType) {
+        //...
+    }
 
-        // 开发中心和直属部门的上级只能是企业
-        if (("DEVCENT".equals(request.getOrgType()) || "DIRDEP".equals(request.getOrgType()))
-                && !"ENTP".equals(superiorOrgType.getCode())) {
-            throw new BusinessException("开发中心或直属部门的上级(id = '"
-                    + request.getSuperior() + "')不是企业！");
-        }
+    // 企业是在创建租户的时候创建好的，因此不能单独创建企业
+    private void shouldNotCreateEntpAlone(String orgType) {
+        //...
+    }
 
 
-        // 组织负责人可以空缺，如果有的话，的必须是一个在职员工（含试用期）
-        if (request.getLeader() != null
-                && !empRepository.existsByIdAndStatus(tenant, request.getLeader()
-                , EmpStatus.REGULAR, EmpStatus.PROBATION)) {
-            throw new BusinessException("组织负责人(id='"
-                    + request.getLeader() + "')不是在职员工！");
-        }
+    //校验上级组织的规则分组
+    private void validateSuperior(Long tenant, Long superior, String orgType) {
+        Org superiorOrg = superiorShouldEffective(tenant, superior);
+        OrgType superiorOrgType = findSuperiorOrgType(tenant, superior, superiorOrg);
+        superiorOfDevGroupMustDevCenter(superior, orgType
+                , superiorOrgType);
+        SuperiorOfDevCenterAndDirectDeptMustEntp(superior, orgType
+                , superiorOrgType);
+    }
 
-        // 组织必须有名称
-        if (isBlank(request.getName())) {
-            throw new BusinessException("组织没有名称！");
-        }
+    // 上级组织应该是有效
+    private Org superiorShouldEffective(Long tenant, Long superior) {
+        //...
+    }
 
-        // 同一个组织下的下级组织不能重名
-        if (orgRepository.existsBySuperiorAndName(tenant, request.getSuperior(), request.getName())) {
-            throw new BusinessException("同一上级下已经有名为'"
-                    + request.getName() + "'的组织存在！");
-        }
+    private OrgType findSuperiorOrgType(Long tenant, Long superior, Org superiorOrg) {
+        //...
+    }
+
+    // 开发中心和直属部门的上级只能是企业
+    private void SuperiorOfDevCenterAndDirectDeptMustEntp(Long superior, String orgType, OrgType superiorOrgType) {
+        //...
+    }
+
+    // 开发组的上级只能是开发中心
+    private void superiorOfDevGroupMustDevCenter(Long superior, String orgType, OrgType superiorOrgType) {
+        //...
+    }
+
+    // 校验组织名称的规则分组
+    private void verifyOrgName(Long tenant, String name, Long superior) {
+        orgNameShouldNotEmpty(name);
+        nameShouldNotDuplicatedInSameSuperior(tenant, superior, name);
+    }
+
+    // 组织必须有名称
+    private void orgNameShouldNotEmpty(String name) {
+        //...
+    }
+
+    // 同一个上级下的组织不能重名
+    private void nameShouldNotDuplicatedInSameSuperior(Long tenant, Long superior, String name) {
+        //...
     }
 }

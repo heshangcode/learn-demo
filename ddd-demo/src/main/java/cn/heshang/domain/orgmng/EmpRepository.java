@@ -1,4 +1,4 @@
-package cn.heshang.adapter.driving.persistence.orgmng;
+package cn.heshang.domain.orgmng;
 
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
  * @date 2023/1/6 08:57
  * version: 1.0
  */
-@Repository
-public class EmpRepository {
+public interface EmpRepository {
 
 }

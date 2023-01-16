@@ -1,8 +1,8 @@
 package cn.heshang.application.orgmng;
 
-import cn.heshang.adapter.driving.persistence.orgmng.EmpRepository;
-import cn.heshang.adapter.driving.persistence.orgmng.OrgRepository;
-import cn.heshang.adapter.driving.persistence.orgmng.OrgTypeRepository;
+import cn.heshang.domain.orgmng.EmpRepository;
+import cn.heshang.domain.orgmng.OrgRepository;
+import cn.heshang.domain.orgmng.OrgTypeRepository;
 import cn.heshang.adapter.driving.persistence.tenantmng.TenantRepository;
 import cn.heshang.adapter.driving.persistence.usermng.UserRepository;
 import cn.heshang.domain.orgmng.Org;

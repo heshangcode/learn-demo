@@ -1,5 +1,8 @@
 package cn.heshang.adapter.driving.persistence.orgmng;
 
+import cn.heshang.domain.orgmng.Org;
+import org.springframework.stereotype.Repository;
+
 /**
  * TODO
  *
@@ -7,5 +10,9 @@ package cn.heshang.adapter.driving.persistence.orgmng;
  * @date 2023/1/6 08:57
  * version: 1.0
  */
+@Repository
 public class OrgRepository {
+    public Org save(Org org) {
+        return null;
+    }
 }

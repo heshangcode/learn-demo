@@ -1,4 +1,4 @@
-package cn.heshang.domain.orgmng;
+package cn.heshang.domain.orgmng.orgtype;
 
 /**
  * TODO
@@ -7,5 +7,5 @@ package cn.heshang.domain.orgmng;
  * @date 2023/1/16 08:43
  * version: 1.0
  */
-public class OrgTypeStatus {
+public class OrgType {
 }

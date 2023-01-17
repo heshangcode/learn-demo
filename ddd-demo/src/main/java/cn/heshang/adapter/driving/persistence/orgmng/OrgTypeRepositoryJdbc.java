@@ -1,6 +1,6 @@
 package cn.heshang.adapter.driving.persistence.orgmng;
 
-import cn.heshang.domain.orgmng.OrgTypeRepository;
+import cn.heshang.domain.orgmng.orgtype.OrgTypeRepository;
 
 /**
  * TODO

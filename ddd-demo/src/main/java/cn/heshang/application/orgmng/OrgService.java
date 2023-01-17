@@ -1,10 +1,9 @@
 package cn.heshang.application.orgmng;
 
-import cn.heshang.domain.orgmng.*;
-import cn.heshang.adapter.driving.persistence.tenantmng.TenantRepository;
-import cn.heshang.adapter.driving.persistence.usermng.UserRepository;
+import cn.heshang.domain.orgmng.org.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * TODO
@@ -23,7 +22,11 @@ public class OrgService {
     @Autowired
     private final OrgBuilderFactory orgBuilderFactory;
 
+    @Autowired
+    private final OrgHandler orgHandler;
+
     // "添加组织"功能的入口
+    @Transactional
     public OrgDto addOrg(OrgDto request, Long userId) {
         OrgBuilder orgBuilder = orgBuilderFactory.create();
         //修改的部分在这里
@@ -37,9 +40,35 @@ public class OrgService {
         return buildOrgDto(org);
     }
 
+
+    //修改组织基本信息
+    @Transactional
+    public OrgDto updateOrgBasic(Long id, OrgDto request, Long userId) {
+        Org org = orgRepository.findById(request.getTenant(), id).orElseThrow(() -> {
+            throw new BusinessException("要修改的组织(id =" + id + " )不存在！");
+        });
+        orgHandler.updateBasic(org, request.getName(), request.getLeader(), userId);
+        orgRepository.update(org);
+        return buildOrgDto(org);
+    }
+
+    //取消组织
+    @Transactional
+    public Long cancelOrg(Long id, Long tenant, Long userId) {
+        Org org = orgRepository.findById(tenant, id).orElseThrow(() -> {
+            throw new BusinessException("要取消的组织(id =" + id + "  )不存在！");
+        });
+        orgHandler.cancel(org, userId);
+        orgRepository.update(org);
+        return org.getId();
+    }
+
+
     private OrgDto buildOrgDto(Org org) {
         //将领域对象转成DTO...
     }
+
     //原来DTO转领域对象的逻辑也移到了工厂
+
 
 }

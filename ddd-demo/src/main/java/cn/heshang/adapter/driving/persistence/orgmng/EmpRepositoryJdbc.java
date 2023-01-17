@@ -1,6 +1,6 @@
 package cn.heshang.adapter.driving.persistence.orgmng;
 
-import cn.heshang.domain.orgmng.EmpRepository;
+import cn.heshang.domain.orgmng.emp.EmpRepository;
 
 /**
  * TODO

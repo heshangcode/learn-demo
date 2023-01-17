@@ -1,4 +1,4 @@
-package cn.heshang.domain.orgmng;
+package cn.heshang.domain.orgmng.org.validator;
 
 import cn.heshang.application.orgmng.OrgDto;
 import cn.heshang.domain.common.CommonValidator;

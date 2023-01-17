@@ -1,7 +1,4 @@
-package cn.heshang.domain.orgmng;
-
-import cn.heshang.domain.orgmng.Org;
-import org.springframework.stereotype.Repository;
+package cn.heshang.domain.orgmng.org;
 
 import java.util.Optional;
 

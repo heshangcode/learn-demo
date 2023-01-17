@@ -1,4 +1,4 @@
-package cn.heshang.domain.orgmng;
+package cn.heshang.domain.orgmng.org.validator;
 
 /**
  * TODO
@@ -7,5 +7,5 @@ package cn.heshang.domain.orgmng;
  * @date 2023/1/16 09:23
  * version: 1.0
  */
-public class OrgLeaderValidator {
+public class OrgNameValidator {
 }

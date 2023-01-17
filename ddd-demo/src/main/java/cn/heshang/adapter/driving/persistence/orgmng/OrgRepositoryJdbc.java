@@ -1,8 +1,8 @@
 package cn.heshang.adapter.driving.persistence.orgmng;
 
-import cn.heshang.domain.orgmng.Org;
-import cn.heshang.domain.orgmng.OrgRepository;
-import cn.heshang.domain.orgmng.OrgStatus;
+import cn.heshang.domain.orgmng.org.Org;
+import cn.heshang.domain.orgmng.org.OrgRepository;
+import cn.heshang.domain.orgmng.org.OrgStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;

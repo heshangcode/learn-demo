@@ -1,7 +1,10 @@
-package cn.heshang.domain.orgmng;
+package cn.heshang.domain.orgmng.org;
 
 import cn.heshang.domain.common.CommonValidator;
-import org.springframework.beans.factory.annotation.Autowired;
+import cn.heshang.domain.orgmng.org.validator.OrgTypeValidator;
+import cn.heshang.domain.orgmng.org.validator.SuperiorValidator;
+import cn.heshang.domain.orgmng.org.validator.OrgLeaderValidator;
+import cn.heshang.domain.orgmng.org.validator.OrgNameValidator;
 
 import java.time.LocalDateTime;
 

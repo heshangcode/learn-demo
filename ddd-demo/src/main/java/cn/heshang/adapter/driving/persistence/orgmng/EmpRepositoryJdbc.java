@@ -1,6 +1,7 @@
 package cn.heshang.adapter.driving.persistence.orgmng;
 
 import cn.heshang.domain.orgmng.emp.EmpRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * TODO
@@ -9,5 +10,7 @@ import cn.heshang.domain.orgmng.emp.EmpRepository;
  * @date 2023/1/16 09:00
  * version: 1.0
  */
+@Repository
+
 public class EmpRepositoryJdbc implements EmpRepository {
 }

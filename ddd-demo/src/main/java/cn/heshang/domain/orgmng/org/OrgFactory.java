@@ -1,6 +1,6 @@
 package cn.heshang.domain.orgmng.org;
 
-import cn.heshang.application.orgmng.OrgDto;
+import cn.heshang.application.orgmng.OrgResponse;
 import cn.heshang.domain.orgmng.org.validator.OrgValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,12 +22,12 @@ public class OrgFactory {
         this.validator = validator;
     }
 
-    public Org build(OrgDto request, Long userId) {
+    public Org build(OrgResponse request, Long userId) {
         validator.validate(request);
         return buildOrg(request);
     }
 
-    private Org buildOrg(OrgDto request) {
+    private Org buildOrg(OrgResponse request) {
         //DTO转换成领域对象
     }
 }

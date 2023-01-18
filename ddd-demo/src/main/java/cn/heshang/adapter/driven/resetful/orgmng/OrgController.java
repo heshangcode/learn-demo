@@ -1,6 +1,6 @@
 package cn.heshang.adapter.driven.resetful.orgmng;
 
-import cn.heshang.application.orgmng.OrgDto;
+import cn.heshang.application.orgmng.OrgResponse;
 import cn.heshang.application.orgmng.OrgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +24,7 @@ public class OrgController {
     }
 
     @PostMapping("/api/organizations")
-    public OrgDto addOrg(@RequestBody OrgDto request) {
+    public OrgResponse addOrg(@RequestBody OrgResponse request) {
         //从请求里解析出 userId ...
         String userId = "";
         return orgService.addOrg(request, userId);

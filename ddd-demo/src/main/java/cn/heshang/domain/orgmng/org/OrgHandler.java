@@ -1,6 +1,7 @@
 package cn.heshang.domain.orgmng.org;
 
 import cn.heshang.domain.common.CommonValidator;
+import cn.heshang.domain.orgmng.org.validator.CancelOrgValidator;
 import cn.heshang.domain.orgmng.org.validator.OrgLeaderValidator;
 import cn.heshang.domain.orgmng.org.validator.OrgNameValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,11 @@ public class OrgHandler {
         cancelValidator.cancelledOrgShouldNotHasEmp(org.getTenant()
                 , org.getId());
         cancelValidator.OnlyEffectiveOrgCanBeCancelled(org);
-        org.setStatus(OrgStatus.CANCELLED);
+        //org.setStatus(OrgStatus.CANCELLED);
+        //优化封装 只需告诉 Org 要进行撤销，但不必了解 Org 内部细节
+        org.cancel();
         updateAuditInfo(org, userId);
+
     }
 
     private void updateLeader(Org org, Long newLeader) {
@@ -58,6 +62,6 @@ public class OrgHandler {
 
     private void updateAuditInfo(Org org, Long userId) {
         // 设置最后修改人和时间
-        // TODO: chenxinkui 2023/1/17 这里是否就是操作 db 了
+        // TODO:  2023/1/17 这里是否就是操作 db 了
     }
 }

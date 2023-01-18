@@ -1,5 +1,6 @@
 package cn.heshang.domain.orgmng.org;
 
+import cn.heshang.common.framework.domain.AuditableEntity;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
  * version: 1.0
  */
 @Data
-public class Org {
+public class Org extends AuditableEntity {
     private Long id;
     private Long tenantId;
     private Long superiorId;
@@ -20,14 +21,17 @@ public class Org {
     private Long leaderId;
     private String name;
     private OrgStatus status;          // 使用了枚举类型
-    private LocalDateTime createdAt;
-    private Long createdBy;
-    private LocalDateTime lastUpdatedAt;
-    private Long lastUpdatedBy;
 
     public Org() {
         status = OrgStatus.EFFECTIVE;  //组织的初始状态默认为有效
     }
 
+    //Org 自己管理自己的状态
+    public void cancel() {
+        this.status = OrgStatus.CANCELLED;
+    }
 
+    public boolean isEffective() {
+        return status.equals(OrgStatus.EFFECTIVE);
+    }
 }

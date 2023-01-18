@@ -27,7 +27,7 @@ public class OrgService {
 
     // "添加组织"功能的入口
     @Transactional
-    public OrgDto addOrg(OrgDto request, Long userId) {
+    public OrgResponse addOrg(OrgResponse request, Long userId) {
         OrgBuilder orgBuilder = orgBuilderFactory.create();
         //修改的部分在这里
         //Org org = orgBuilder.tenantId(request.getTenantId()).orgTypeCode(request.getOrgTypeCode()).leaderId(request.getLeaderId()).superiorId(request.getSuperiorId()).name(request.getName()).createdBy(userid).build();
@@ -43,7 +43,7 @@ public class OrgService {
 
     //修改组织基本信息
     @Transactional
-    public OrgDto updateOrgBasic(Long id, OrgDto request, Long userId) {
+    public OrgResponse updateOrgBasic(Long id, OrgResponse request, Long userId) {
         Org org = orgRepository.findById(request.getTenant(), id).orElseThrow(() -> {
             throw new BusinessException("要修改的组织(id =" + id + " )不存在！");
         });
@@ -64,7 +64,7 @@ public class OrgService {
     }
 
 
-    private OrgDto buildOrgDto(Org org) {
+    private OrgResponse buildOrgDto(Org org) {
         //将领域对象转成DTO...
     }
 

@@ -15,7 +15,7 @@ public enum OrgStatus {
     /**
      *
      */
-    EFFECTIVE("EFFECTIVE");
+    EFFECTIVE("EFFECTIVE"), CANCELLED("CANCELLED");
 
     private String status;
 }

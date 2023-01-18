@@ -1,6 +1,6 @@
 package cn.heshang.domain.orgmng.org.validator;
 
-import cn.heshang.application.orgmng.OrgDto;
+import cn.heshang.application.orgmng.OrgResponse;
 import cn.heshang.domain.common.CommonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,7 +31,7 @@ public class OrgValidator {
         // 为依赖注入的组件赋值...
     }
 
-    public void validate(OrgDto request) {
+    public void validate(OrgResponse request) {
         final Long tenant = request.getTenant();
 
         commonValidator.tenantShouldValid(tenant);

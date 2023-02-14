@@ -3,8 +3,6 @@ package cn.heshang.domain.orgmng.org;
 import cn.heshang.common.framework.domain.AuditableEntity;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 /**
  * TODO
  *

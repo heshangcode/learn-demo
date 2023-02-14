@@ -1,7 +1,7 @@
 package cn.heshang.adapter.driven.resetful.orgmng;
 
-import cn.heshang.application.orgmng.OrgResponse;
-import cn.heshang.application.orgmng.OrgService;
+import cn.heshang.application.orgmng.orgservice.OrgResponse;
+import cn.heshang.application.orgmng.orgservice.OrgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

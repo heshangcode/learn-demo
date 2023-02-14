@@ -1,4 +1,4 @@
-package cn.heshang.application.orgmng;
+package cn.heshang.application.orgmng.orgservice;
 
 /**
  * TODO

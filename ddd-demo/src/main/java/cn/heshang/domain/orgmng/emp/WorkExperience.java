@@ -36,8 +36,9 @@ public class WorkExperience extends AuditableEntity {
     // setters and getters ...
 
     // 包级私有权限
-    void setCompany(String company) {
+    WorkExperience setCompany(String company) {
         this.company = company;
+        return this;
     }
 
 }

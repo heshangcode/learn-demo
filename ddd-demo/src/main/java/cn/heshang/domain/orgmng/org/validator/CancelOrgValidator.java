@@ -1,7 +1,6 @@
 package cn.heshang.domain.orgmng.org.validator;
 
 import cn.heshang.domain.orgmng.org.Org;
-import cn.heshang.domain.orgmng.org.OrgStatus;
 import org.springframework.stereotype.Component;
 
 /**

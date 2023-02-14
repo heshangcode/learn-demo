@@ -1,6 +1,6 @@
 package cn.heshang.domain.orgmng.org;
 
-import cn.heshang.application.orgmng.OrgResponse;
+import cn.heshang.application.orgmng.orgservice.OrgResponse;
 import cn.heshang.domain.orgmng.org.validator.OrgValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

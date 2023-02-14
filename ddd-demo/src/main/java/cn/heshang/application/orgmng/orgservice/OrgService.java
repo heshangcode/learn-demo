@@ -1,4 +1,4 @@
-package cn.heshang.application.orgmng;
+package cn.heshang.application.orgmng.orgservice;
 
 import cn.heshang.domain.orgmng.org.*;
 import org.springframework.beans.factory.annotation.Autowired;

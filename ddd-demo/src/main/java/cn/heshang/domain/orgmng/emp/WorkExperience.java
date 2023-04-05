@@ -19,18 +19,14 @@ import java.time.LocalDateTime;
 public class WorkExperience extends AuditableEntity {
     private Long id;              // 只读
     private Long tenantId;        // 只读
-    private LocalDate startDate;  // 只读
-    private LocalDate endDate;    // 只读
+    private Period period;
     private String company;       // 读写
 
     // 包级私有权限
-    WorkExperience(Long tenantId, LocalDate startDate, LocalDate endDate
-            , LocalDateTime createdAt, Long createdBy) {
-
+    protected WorkExperience(Long tenantId, Period period, LocalDateTime createdAt, Long createdBy) {
         super(createdAt, createdBy);
         this.tenantId = tenantId;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.period = period;
     }
 
     // setters and getters ...

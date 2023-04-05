@@ -54,24 +54,15 @@ public class Emp extends AuditableEntity {
         status = REGULAR;
     }
 
-    //终止
-    void terminate() {
-        // 调用业务规则: 已经终止的员工不能再次终止
-        shouldNotTerminateAgain();
-        status = TERMINATED;
-    }
-
     // 实现业务规则
-    private void onlyProbationCanBecomeRegular() {
-        if (status != PROBATION) {
-            throw new BusinessException("试用期员工才能转正！");
-        }
+    public Emp becomeRegular() {
+        status = status.becomeRegular();
+        return this;
     }
 
-    private void shouldNotTerminateAgain() {
-        if (status == TERMINATED) {
-            throw new BusinessException("已经终止的员工不能再次终止！");
-        }
+    public Emp terminate() {
+        status = status.terminate();
+        return this;
     }
 
     // 对 skills、experiences 和 postCodes 的操作 ...

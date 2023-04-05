@@ -20,6 +20,7 @@ public abstract class AuditableEntity {
         this.createdBy = createdBy;
     }
 
+
     // lastUPdatedAt 和 lastUpdatedBy 的 setter 以及所有属性的 getter ...
 
 }
